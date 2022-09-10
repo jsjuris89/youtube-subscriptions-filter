@@ -30,24 +30,17 @@ function deleteMultipleAuthorVideos(author) {
 function deleteOtherAuthorVideos(author) {
     let selected = document.querySelectorAll("#items .style-scope.ytd-grid-renderer")
 
+    let allAuthors = author.split(", ")
+
     selected.forEach(function (item) {
-        if (item.querySelector(".yt-simple-endpoint.style-scope.yt-formatted-string").textContent !== author) {
+        let textContent = item.querySelector(".yt-simple-endpoint.style-scope.yt-formatted-string").textContent;
+
+        if (!allAuthors.includes(textContent)) {
             item.remove()
         }
     })
 }
-
-
-// part where you can differentiate between shorts or regular videos
-// let container = document.querySelectorAll("#items .style-scope.ytd-grid-renderer")
-
-// container.forEach(function(item) {
-//     let thumbnail = item.querySelector("#overlays .style-scope.ytd-thumbnail")
-//     console.log(thumbnail);
-//     console.log(thumbnail.getAttribute("overlay-style"))
-// })    
-
-
+ 
 // SHORTS
 function askShorts() {
     let deleteShorts = confirm("Do you want to delete shorts?")
@@ -83,5 +76,4 @@ function keepShortsVideos() {
             item.remove()
         }
     })
-
 }
