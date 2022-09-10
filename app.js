@@ -4,43 +4,28 @@ function askAuthor() {
     let deleteAuthorVideos = confirm("Do you want to delete author videos?")
 
     if (deleteAuthorVideos) {
-        deleteThisAuthorVideos(youtubeVideoAuthor)
+        deleteMultipleAuthorVideos(youtubeVideoAuthor)
     } else {
         deleteOtherAuthorVideos(youtubeVideoAuthor)
     }
 }
 
-function deleteThisAuthorVideos(author) {
+
+function deleteMultipleAuthorVideos(author) {
     let selected = document.querySelectorAll("#items .style-scope.ytd-grid-renderer")
 
-    selected.forEach(function (item) {
-        if (item.querySelector(".yt-simple-endpoint.style-scope.yt-formatted-string").textContent === author) {
-            item.remove()
-        }
-    })
-}
-
-
-function deleteMultipleAuthorVideos() {
-    let selected = document.querySelectorAll("#items .style-scope.ytd-grid-renderer")
-
-    let allAuthors = ["Coding Tech", "GitHub"]
+    let allAuthors = author.split(", ")
 
     selected.forEach(function (item) {
         let textContent = item.querySelector(".yt-simple-endpoint.style-scope.yt-formatted-string").textContent;
 
         for (let i = 0; i < allAuthors.length; i++) {
-            console.log(i)
             if (textContent == allAuthors[i]) {
                 item.remove()
             }
-        }
-        
+        }  
     })
 }
-
-
-
 
 function deleteOtherAuthorVideos(author) {
     let selected = document.querySelectorAll("#items .style-scope.ytd-grid-renderer")
