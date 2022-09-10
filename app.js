@@ -1,12 +1,4 @@
-const subscriptionsSections = document.querySelector("#contents.style-scope.ytd-section-list-renderer")
-
-// Simply getting all authors inside array
-// let allAuthors = document.querySelectorAll(".yt-simple-endpoint.style-scope.yt-formatted-string")
-// const result = [];
-// for (let i = 0; i < allAuthors.length; i++) {
-//     result.push(allAuthors[i].textContent);
-// }
-
+// Video Author
 function askAuthor() {
     let youtubeVideoAuthor = prompt("Enter Author?")
     let deleteAuthorVideos = confirm("Do you want to delete author videos?")
@@ -38,3 +30,51 @@ function deleteOtherAuthorVideos(author) {
     })  
 }
 
+
+// part where you can differentiate between shorts or regular videos
+// let container = document.querySelectorAll("#items .style-scope.ytd-grid-renderer")
+
+// container.forEach(function(item) {
+//     let thumbnail = item.querySelector("#overlays .style-scope.ytd-thumbnail")
+//     console.log(thumbnail);
+//     console.log(thumbnail.getAttribute("overlay-style"))
+// })    
+
+
+// SHORTS
+function askShorts() {
+    let deleteShorts = confirm("Do you want to delete shorts?")
+
+    if (deleteShorts) {
+        deleteShortsVideos()
+    } else {
+        keepShortsVideos()
+    }
+}
+
+function deleteShortsVideos() {
+    let container = document.querySelectorAll("#items .style-scope.ytd-grid-renderer")
+
+    container.forEach(function(item) {
+        let thumbnail = item.querySelector("#overlays .style-scope.ytd-thumbnail")
+        let attributeValue = thumbnail.getAttribute("overlay-style")
+
+        if (attributeValue === "SHORTS") {
+            item.remove()
+        }     
+    })   
+}
+
+function keepShortsVideos() {
+    let container = document.querySelectorAll("#items .style-scope.ytd-grid-renderer")
+
+    container.forEach(function(item) {
+        let thumbnail = item.querySelector("#overlays .style-scope.ytd-thumbnail")
+        let attributeValue = thumbnail.getAttribute("overlay-style")
+
+        if (attributeValue !== "SHORTS") {
+            item.remove()
+        }     
+    })   
+
+}
