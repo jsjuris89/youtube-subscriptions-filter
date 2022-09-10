@@ -7,20 +7,34 @@ const subscriptionsSections = document.querySelector("#contents.style-scope.ytd-
 //     result.push(allAuthors[i].textContent);
 // }
 
-function ask() {
+function askAuthor() {
     let youtubeVideoAuthor = prompt("Enter Author?")
+    let deleteAuthorVideos = confirm("Do you want to delete author videos?")
 
-    deleteVideo(youtubeVideoAuthor)
+    if (deleteAuthorVideos) {
+        deleteThisAuthorVideos(youtubeVideoAuthor)
+    } else {
+        deleteOtherAuthorVideos(youtubeVideoAuthor)
+    }
 }
 
-function deleteVideo(author) {
+function deleteThisAuthorVideos(author) {
     let selected = document.querySelectorAll("#items .style-scope.ytd-grid-renderer")
 
     selected.forEach(function(item) {
-        // console.log(item.querySelector(".yt-simple-endpoint.style-scope.yt-formatted-string").textContent)
         if (item.querySelector(".yt-simple-endpoint.style-scope.yt-formatted-string").textContent === author) {
             item.remove()
         }
     })    
+}
+
+function deleteOtherAuthorVideos(author) {
+    let selected = document.querySelectorAll("#items .style-scope.ytd-grid-renderer")
+
+    selected.forEach(function(item) {
+        if (item.querySelector(".yt-simple-endpoint.style-scope.yt-formatted-string").textContent !== author) {
+            item.remove()
+        }
+    })  
 }
 
