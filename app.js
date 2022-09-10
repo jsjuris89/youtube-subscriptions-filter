@@ -13,21 +13,43 @@ function askAuthor() {
 function deleteThisAuthorVideos(author) {
     let selected = document.querySelectorAll("#items .style-scope.ytd-grid-renderer")
 
-    selected.forEach(function(item) {
+    selected.forEach(function (item) {
         if (item.querySelector(".yt-simple-endpoint.style-scope.yt-formatted-string").textContent === author) {
             item.remove()
         }
-    })    
+    })
 }
+
+
+function deleteMultipleAuthorVideos() {
+    let selected = document.querySelectorAll("#items .style-scope.ytd-grid-renderer")
+
+    let allAuthors = ["Coding Tech", "GitHub"]
+
+    selected.forEach(function (item) {
+        let textContent = item.querySelector(".yt-simple-endpoint.style-scope.yt-formatted-string").textContent;
+
+        for (let i = 0; i < allAuthors.length; i++) {
+            console.log(i)
+            if (textContent == allAuthors[i]) {
+                item.remove()
+            }
+        }
+        
+    })
+}
+
+
+
 
 function deleteOtherAuthorVideos(author) {
     let selected = document.querySelectorAll("#items .style-scope.ytd-grid-renderer")
 
-    selected.forEach(function(item) {
+    selected.forEach(function (item) {
         if (item.querySelector(".yt-simple-endpoint.style-scope.yt-formatted-string").textContent !== author) {
             item.remove()
         }
-    })  
+    })
 }
 
 
@@ -55,26 +77,26 @@ function askShorts() {
 function deleteShortsVideos() {
     let container = document.querySelectorAll("#items .style-scope.ytd-grid-renderer")
 
-    container.forEach(function(item) {
+    container.forEach(function (item) {
         let thumbnail = item.querySelector("#overlays .style-scope.ytd-thumbnail")
         let attributeValue = thumbnail.getAttribute("overlay-style")
 
         if (attributeValue === "SHORTS") {
             item.remove()
-        }     
-    })   
+        }
+    })
 }
 
 function keepShortsVideos() {
     let container = document.querySelectorAll("#items .style-scope.ytd-grid-renderer")
 
-    container.forEach(function(item) {
+    container.forEach(function (item) {
         let thumbnail = item.querySelector("#overlays .style-scope.ytd-thumbnail")
         let attributeValue = thumbnail.getAttribute("overlay-style")
 
         if (attributeValue !== "SHORTS") {
             item.remove()
-        }     
-    })   
+        }
+    })
 
 }
